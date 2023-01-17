@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
     [SerializeField] private Head _head;
     [SerializeField] private Body _body;
@@ -23,7 +23,8 @@ public class Player : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        _head.EnemyDetected -= OnEnemyDetected;
+        _head.EnemyLost -= OnEnemyLost;
     }
 
     private void Start()
