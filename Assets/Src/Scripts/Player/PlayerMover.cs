@@ -7,6 +7,7 @@ public class PlayerMover : MonoBehaviour
 {
     private const float DeltaStick = 0.1f;
     private const float RotationTime = 1f;
+    private readonly float DeltaMove = Mathf.Sqrt(1.4f);
 
     private PlayerInput _playerInput;
     private float _speed;
@@ -53,7 +54,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Move(Vector2 value)
     {
-        Vector3 movement = new Vector3(0, 0, Mathf.Abs(value.y));
+        Vector3 movement = new Vector3(0, 0, Mathf.Abs(value.y) + Mathf.Abs(value.x)) / DeltaMove;
         transform.Translate(movement * _speed * Time.deltaTime);
     }
 }

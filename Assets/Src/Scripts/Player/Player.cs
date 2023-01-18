@@ -41,6 +41,7 @@ public class Player : Character
         if(target != null)
         {
             _body.transform.LookAt(target.transform);
+            _body.Attack(target);
         }
     }
 
