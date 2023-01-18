@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Body : Detail
 {
     private Weapon[] _weapons;
@@ -13,7 +9,7 @@ public class Body : Detail
 
     public void Attack(Character target)
     {
-        foreach(var weapon in _weapons)
+        foreach (var weapon in _weapons)
         {
             weapon.Shoot(target);
         }

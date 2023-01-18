@@ -38,7 +38,7 @@ public class Player : Character
     {
         var target = FindNearestEnemy(_enemies);
 
-        if(target != null)
+        if (target != null)
         {
             _body.transform.LookAt(target.transform);
             _body.Attack(target);
@@ -52,7 +52,7 @@ public class Player : Character
 
         Dictionary<float, Enemy> enemiesOnDistance = new Dictionary<float, Enemy>();
 
-        foreach(var enemy in enemies)
+        foreach (var enemy in enemies)
         {
             enemiesOnDistance.Add(Vector3.Distance(transform.position, enemy.transform.position), enemy);
         }
@@ -62,7 +62,7 @@ public class Player : Character
 
     private void OnEnemyDetected(Enemy enemy)
     {
-        if(_enemies.Contains(enemy))
+        if (_enemies.Contains(enemy))
         {
             return;
         }

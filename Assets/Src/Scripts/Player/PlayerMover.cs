@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMover : MonoBehaviour
 {
@@ -37,7 +34,7 @@ public class PlayerMover : MonoBehaviour
     {
         var value = _playerInput.PlayerMap.Move.ReadValue<Vector2>();
 
-        if(value.sqrMagnitude < DeltaStick)
+        if (value.sqrMagnitude < DeltaStick)
         {
             return;
         }

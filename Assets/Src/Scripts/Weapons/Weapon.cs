@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -22,7 +21,7 @@ public class Weapon : MonoBehaviour
         _owner = GetComponentInParent<Character>();
         _bullets = new List<Bullet>();
 
-        for(int i = 0; i < BulletsCount; i++)
+        for (int i = 0; i < BulletsCount; i++)
         {
             var newBullet = Instantiate(_template, _shootPlace);
             newBullet.Initialize(_owner, _damage, _bulletSpeed);
@@ -38,7 +37,7 @@ public class Weapon : MonoBehaviour
 
     public void Shoot(Character target)
     {
-        if(_delayBetweenShoot > _elapsedTime)
+        if (_delayBetweenShoot > _elapsedTime)
         {
             return;
         }

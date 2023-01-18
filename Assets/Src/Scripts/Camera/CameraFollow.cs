@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -20,7 +18,7 @@ public class CameraFollow : MonoBehaviour
 
         if (Mathf.Abs(newZ - _zPosition) > _offset)
         {
-            Vector3 movement = new Vector3(0,0, newZ - _zPosition);
+            Vector3 movement = new Vector3(0, 0, newZ - _zPosition);
 
             transform.position += movement * Time.deltaTime;
         }
