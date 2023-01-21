@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : Detail
 {
-    private const int BulletsCount = 30;
+    private const int BulletsCount = 15;
 
     [SerializeField] private int _damage;
     [SerializeField] private float _delayBetweenShoot;

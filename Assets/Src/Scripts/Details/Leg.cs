@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leg : Detail
+public class Leg : RobotDetail
 {
     [SerializeField] private float _speed;
 

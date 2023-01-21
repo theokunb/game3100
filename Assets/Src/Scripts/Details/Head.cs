@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider))]
-public class Head : Detail
+public class Head : RobotDetail
 {
     [SerializeField] private float _scannerRadius;
 

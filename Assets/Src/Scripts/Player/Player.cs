@@ -1,42 +1,32 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerScanner))]
 public class Player : Character
 {
-    [SerializeField] private Head _head;
-    [SerializeField] private Body _body;
-    [SerializeField] private Leg _leg;
+    [SerializeField] private Transform _legPosition;
 
-    private List<Enemy> _enemies;
+    private PlayerScanner _scanner;
+    private Leg _leg;
+    private Body _body;
+    private Head _head;
+    private List<Weapon> _weapons = new List<Weapon>();
 
-    private void Awake()
-    {
-        _enemies = new List<Enemy>();
-    }
-
-    private void OnEnable()
-    {
-        _head.EnemyDetected += OnEnemyDetected;
-        _head.EnemyLost += OnEnemyLost;
-    }
-
-    private void OnDisable()
-    {
-        _head.EnemyDetected -= OnEnemyDetected;
-        _head.EnemyLost -= OnEnemyLost;
-    }
+    public IEnumerable<WeaponPlace> WeaponPlaces => _body.WeaponPlaces;
 
     private void Start()
     {
-        _body.transform.position = _leg.UpperPlaceOfDetail.position;
-        _head.transform.position = _body.UpperPlaceOfDetail.position;
+        _leg.SetPosition(_legPosition);
+        _body.SetPosition(_leg.UpperPlaceOfDetail);
+        _head.SetPosition(_body.UpperPlaceOfDetail);
+        _body.AddWeapons(_weapons);
 
+        GameStorage.SavePlayer(this);
     }
 
     private void Update()
     {
-        var target = FindNearestEnemy(_enemies);
+        var target = _scanner.GetNearestEnemy();
 
         if (target != null)
         {
@@ -45,33 +35,36 @@ public class Player : Character
         }
     }
 
-    private Enemy FindNearestEnemy(List<Enemy> enemies)
+    public IEnumerable<DetailData> GetAllDetails()
     {
-        if (enemies.Count == 0)
-            return null;
+        var details = GetComponentsInChildren<Detail>();
 
-        Dictionary<float, Enemy> enemiesOnDistance = new Dictionary<float, Enemy>();
-
-        foreach (var enemy in enemies)
+        foreach (var detail in details)
         {
-            enemiesOnDistance.Add(Vector3.Distance(transform.position, enemy.transform.position), enemy);
+            yield return new DetailData(detail.Title);
         }
-
-        return enemiesOnDistance.OrderBy(element => element.Key).First().Value;
     }
 
-    private void OnEnemyDetected(Enemy enemy)
+    public void SetDetail(Leg leg)
     {
-        if (_enemies.Contains(enemy))
-        {
-            return;
-        }
-
-        _enemies.Add(enemy);
+        _leg = Instantiate(leg, transform);
     }
 
-    private void OnEnemyLost(Enemy enemy)
+    public void SetDetail(Body body)
     {
-        _enemies.Remove(enemy);
+        _body = Instantiate(body, transform);
+    }
+
+    public void SetDetail(Head head)
+    {
+        _scanner = GetComponent<PlayerScanner>();
+
+        _head = Instantiate(head, transform);
+        _scanner.InitializeHead(_head);
+    }
+
+    public void SetDetail(Weapon weapon)
+    {
+        _weapons.Add(weapon);
     }
 }
