@@ -16,6 +16,8 @@ public class Weapon : Detail
     private float _elapsedTime;
     private List<Bullet> _bullets;
 
+    public int Damage => _damage;
+
     private void Start()
     {
         _owner = GetComponentInParent<Character>();

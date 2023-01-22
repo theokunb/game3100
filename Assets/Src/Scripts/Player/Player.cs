@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,12 +17,8 @@ public class Player : Character
 
     private void Start()
     {
-        _leg.SetPosition(_legPosition);
-        _body.SetPosition(_leg.UpperPlaceOfDetail);
-        _head.SetPosition(_body.UpperPlaceOfDetail);
-        _body.AddWeapons(_weapons);
-
-        GameStorage.SavePlayer(this);
+        CorrectDetails();
+        Save();
     }
 
     private void Update()
@@ -33,6 +30,19 @@ public class Player : Character
             _body.transform.LookAt(target.transform);
             _body.Attack(target);
         }
+    }
+
+    public void CorrectDetails()
+    {
+        _leg.SetPosition(_legPosition);
+        _body.SetPosition(_leg.UpperPlaceOfDetail);
+        _head.SetPosition(_body.UpperPlaceOfDetail);
+        _body.TryAddWeapons(_weapons);
+    }
+
+    public void Save()
+    {
+        GameStorage.SavePlayer(this);
     }
 
     public IEnumerable<DetailData> GetAllDetails()
@@ -47,16 +57,19 @@ public class Player : Character
 
     public void SetDetail(Leg leg)
     {
+        Destroy(_leg?.gameObject);
         _leg = Instantiate(leg, transform);
     }
 
     public void SetDetail(Body body)
     {
+        Destroy(_body?.gameObject);
         _body = Instantiate(body, transform);
     }
 
     public void SetDetail(Head head)
     {
+        Destroy(_head?.gameObject);
         _scanner = GetComponent<PlayerScanner>();
 
         _head = Instantiate(head, transform);
@@ -66,5 +79,19 @@ public class Player : Character
     public void SetDetail(Weapon weapon)
     {
         _weapons.Add(weapon);
+    }
+
+    public void DropWeapon(Weapon weapon, bool isSpawnDrop)
+    {
+        _weapons.Remove(weapon);
+        
+        if(isSpawnDrop == false)
+        {
+            Destroy(weapon.gameObject);
+        }
+        else
+        {
+            Instantiate(weapon, transform.position, Quaternion.identity);
+        }
     }
 }

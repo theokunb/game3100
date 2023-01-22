@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -10,6 +9,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform _cameraHeadView;
     [SerializeField] private Transform _cameraBodyView;
     [SerializeField] private Transform _cameraLegView;
+    [SerializeField] private Transform _cameraWeaponsView;
 
     private Coroutine _translationTask;
 
@@ -18,52 +18,52 @@ public class CameraController : MonoBehaviour
         _camera.transform.position = _cameraMainView.position;
     }
 
-    public void Translate(CameraPoint cameraPoint)
+    public void Translate(DetailType detailType)
     {
-        switch(cameraPoint)
+        switch(detailType)
         {
-            case CameraPoint.Main:
-                TranslateCamera(_cameraMainView);
-                break;
-            case CameraPoint.Head:
+            case DetailType.Head:
                 TranslateCamera(_cameraHeadView);
                 break;
-            case CameraPoint.Body:
+            case DetailType.Body:
                 TranslateCamera(_cameraBodyView);
                 break;
-            case CameraPoint.Leg:
+            case DetailType.Leg:
                 TranslateCamera(_cameraLegView);
+                break;
+            case DetailType.Weapons:
+                TranslateCamera(_cameraWeaponsView);
                 break;
         }
     }
 
     private void TranslateCamera(Transform target)
     {
-        if(_translationTask == null)
+        if (_translationTask == null)
         {
-            _translationTask = StartCoroutine(TranslateCameraTask(target));
+            _translationTask = StartCoroutine(TranslateCameraTask(target.position));
         }
         else
         {
             StopCoroutine(_translationTask);
-            _translationTask = StartCoroutine(TranslateCameraTask(target));
+            _translationTask = StartCoroutine(TranslateCameraTask(target.position));
         }
     }
 
-    private IEnumerator TranslateCameraTask(Transform target)
+    private IEnumerator TranslateCameraTask(Vector3 position)
     {
-        while(_camera.transform.position != target.position)
+        while (_camera.transform.position != position)
         {
-            _camera.transform.position = Vector3.MoveTowards(_camera.transform.position, target.position, Time.deltaTime * _cameraSpeed);
+            _camera.transform.position = Vector3.MoveTowards(_camera.transform.position, position, Time.deltaTime * _cameraSpeed);
             yield return null;
         }
-    }
+    } 
 }
 
-public enum CameraPoint
+public enum DetailType
 {
-    Main,
     Head,
     Body,
-    Leg
+    Leg,
+    Weapons
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Body : RobotDetail
 {
@@ -21,16 +22,21 @@ public class Body : RobotDetail
         }
     }
 
-    public void AddWeapons(List<Weapon> weapons)
+    public void TryAddWeapons(List<Weapon> newWeapons)
     {
-        for (int i = 0; i < _weaponPlaces.Length; i++)
+        foreach (var newWeapon in newWeapons)
         {
-            if (i >= weapons.Count)
+            for (int i = 0; i < _weaponPlaces.Length; i++)
             {
-                return;
+                if (_weaponPlaces[i].IsBusy == false)
+                {
+                    _weapons.Add(Instantiate(newWeapon, _weaponPlaces[i].transform));
+                    break;
+                }
             }
-
-            _weapons.Add(Instantiate(weapons[i], _weaponPlaces[i].transform));
         }
+
+        newWeapons.Clear();
+        newWeapons.AddRange(_weapons.Where(weapon => weapon != null));
     }
 }
