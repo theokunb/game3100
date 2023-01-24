@@ -42,7 +42,7 @@ public class Player : Character
 
     public void Save()
     {
-        GameStorage.SavePlayer(this);
+        GameStorage.Save(new PlayerData(this), GameStorage.PlayerDetails);
     }
 
     public IEnumerable<DetailData> GetAllDetails()

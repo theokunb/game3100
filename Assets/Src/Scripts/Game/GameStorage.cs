@@ -4,38 +4,37 @@ using UnityEngine;
 
 public static class GameStorage
 {
-    private const string PlayerDetails = "/playerDetails.dat";
+    public const string PlayerDetails = "/playerDetails.dat";
+    public const string PlayerWallet = "/wallet.dat";
 
-    public static void SavePlayer(Player player)
+    public static T LoadData<T>(string fileName)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + PlayerDetails;
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-        PlayerData playerData = new PlayerData(player);
-
-        formatter.Serialize(stream, playerData);
-
-        stream.Close();
-    }
-
-    public static PlayerData LoadPlayer()
-    {
-        string path = Application.persistentDataPath + PlayerDetails;
+        string path = Application.persistentDataPath + fileName;
 
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            PlayerData playerData = formatter.Deserialize(stream) as PlayerData;
+            T playerData = (T)formatter.Deserialize(stream);
             stream.Close();
 
             return playerData;
         }
         else
         {
-            return null;
+            return default(T);
         }
+    }
+
+    public static void Save<T>(T data, string fileName)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + fileName;
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, data);
+
+        stream.Close();
     }
 }

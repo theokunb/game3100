@@ -54,7 +54,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: "\u0420\u043E\u0431\u043E \u0433\u0440\u0443\u0434\u044C 2"
-  _level: 1
   _isAvailable: 1
   _upperPlaceOfDetail: {fileID: 3871575172056422344}
 --- !u!65 &8763693433751474134
@@ -83,6 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 0725a18590815f64f96732f81401c6f4, type: 3}
+  _price: 100
 --- !u!1 &3871575171430713646
 GameObject:
   m_ObjectHideFlags: 0
