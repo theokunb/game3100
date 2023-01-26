@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private List<Subpanel> _menuPanels;
     [SerializeField] private Subpanel _rootPanel;
     [SerializeField] private Button _playButton;
 

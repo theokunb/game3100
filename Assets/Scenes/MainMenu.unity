@@ -5477,7 +5477,6 @@ GameObject:
   - component: {fileID: 1726537762}
   - component: {fileID: 1726537761}
   - component: {fileID: 1726537763}
-  - component: {fileID: 1726537764}
   m_Layer: 5
   m_Name: MainPanel
   m_TagString: Untagged
@@ -5561,25 +5560,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _backButton: {fileID: 0}
---- !u!114 &1726537764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726537759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e054c410c0e59b43884cd5ed5767a34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _container: {fileID: 1394993981}
-  _wallet: {fileID: 1459856721}
-  _templates:
-  - {fileID: 8668772859910558210, guid: 702ed544a7695254d8d607028d80ef74, type: 3}
-  - {fileID: 8668772859910558210, guid: bd3de3e6865fd36438a5ce0445d93581, type: 3}
-  - {fileID: 8668772859910558210, guid: c847ff63292a6b944a379b4dd8e5be58, type: 3}
-  _currency: {fileID: 11400000, guid: c797c80f99bca064485508690e621e74, type: 2}
 --- !u!1 &1740821554
 GameObject:
   m_ObjectHideFlags: 0
@@ -7103,8 +7083,9 @@ GameObject:
   - component: {fileID: 2135364151}
   - component: {fileID: 2135364150}
   - component: {fileID: 2135364149}
+  - component: {fileID: 2135364152}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: CurrencyView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7201,3 +7182,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2135364147}
   m_CullTransparentMesh: 1
+--- !u!114 &2135364152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135364147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e054c410c0e59b43884cd5ed5767a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _container: {fileID: 1394993981}
+  _wallet: {fileID: 1459856721}
+  _templates:
+  - {fileID: 8668772859910558210, guid: 702ed544a7695254d8d607028d80ef74, type: 3}
+  - {fileID: 8668772859910558210, guid: bd3de3e6865fd36438a5ce0445d93581, type: 3}
+  - {fileID: 8668772859910558210, guid: c847ff63292a6b944a379b4dd8e5be58, type: 3}
