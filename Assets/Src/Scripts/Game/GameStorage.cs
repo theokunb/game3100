@@ -4,12 +4,11 @@ using UnityEngine;
 
 public static class GameStorage
 {
-    public const string PlayerDetails = "/playerDetails.dat";
-    public const string PlayerWallet = "/wallet.dat";
+    public const string PlayerData = "/playerDetails.dat";
 
-    public static T LoadData<T>(string fileName)
+    public static T LoadData<T>()
     {
-        string path = Application.persistentDataPath + fileName;
+        string path = Application.persistentDataPath + PlayerData;
 
         if (File.Exists(path))
         {
@@ -27,10 +26,10 @@ public static class GameStorage
         }
     }
 
-    public static void Save<T>(T data, string fileName)
+    public static void Save<T>(T data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + fileName;
+        string path = Application.persistentDataPath + PlayerData;
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, data);

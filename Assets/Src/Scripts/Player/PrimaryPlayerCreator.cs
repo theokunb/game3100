@@ -7,6 +7,7 @@ public class PrimaryPlayerCreator : MonoBehaviour
     [SerializeField] private Body _defaultBody;
     [SerializeField] private Head _defaultHead;
     [SerializeField] private Weapon _defaultWeapon;
+    [SerializeField] private Wallet _wallet;
 
     public void CreateDefaultPlayer()
     {
@@ -18,5 +19,10 @@ public class PrimaryPlayerCreator : MonoBehaviour
         {
             _player.SetDetail(_defaultWeapon);
         }
+    }
+
+    public void CreateDefaultWallet()
+    {
+        _wallet.CreateDefault();
     }
 }

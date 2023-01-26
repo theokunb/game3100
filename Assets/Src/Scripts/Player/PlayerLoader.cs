@@ -4,27 +4,26 @@ using UnityEngine;
 public class PlayerLoader : MonoBehaviour
 {
     [SerializeField] private Player _player;
+    [SerializeField] private Wallet _wallet;
     [SerializeField] private PrimaryPlayerCreator _primaryCreator;
     [SerializeField] private ItemsPull _itemsPull;
-    [SerializeField] private Wallet _wallet;
 
     private void Awake()
     {
-        if(TryLoadData(out PlayerData playerData, GameStorage.PlayerDetails))
+        if(TryLoadData(out PlayerData playerData))
         {
             LoadPlayer(playerData);
         }
         else
         {
             _primaryCreator.CreateDefaultPlayer();
+            _primaryCreator.CreateDefaultWallet();
         }
-
-        LoadWallet();
     }
 
-    public bool TryLoadData<T>(out T data, string fileName)
+    public bool TryLoadData<T>(out T data)
     {
-        data = GameStorage.LoadData<T>(fileName);
+        data = GameStorage.LoadData<T>();
 
         return data != null;
     }
@@ -36,24 +35,12 @@ public class PlayerLoader : MonoBehaviour
             var detail = FindDetail(detailData);
             _player.SetDetail((dynamic)detail);
         }
+
+        _wallet.SetCurrency(playerData.GetCurrency());
     }
 
     private Detail FindDetail(DetailData detailData)
     {
         return _itemsPull.Details.Where(detail => detail.Title == detailData.Title).FirstOrDefault();
-    }
-
-    private void LoadWallet()
-    {
-        if(TryLoadData(out MoneyVisitor money, GameStorage.PlayerWallet))
-        {
-
-        }
-        else
-        {
-            money = new MoneyVisitor();
-        }
-
-        _wallet.Init(money);
     }
 }

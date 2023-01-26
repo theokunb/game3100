@@ -1,60 +1,39 @@
-using TMPro;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Wallet : MonoBehaviour
 {
-    [SerializeField] private Image _metalIcon;
-    [SerializeField] private TMP_Text _metal;
-    [SerializeField] private Image _energyIcon;
-    [SerializeField] private TMP_Text _energy;
-    [SerializeField] private Image _fuelIcon;
-    [SerializeField] private TMP_Text _fuel;
+    private List<CurrencyData> _currecncies = new List<CurrencyData>();
 
-    private MoneyVisitor _moneyVisitor;
+    public event Action<CurrencyData> OnValueChanged;
 
-    public MoneyVisitor MoneyVisitor => _moneyVisitor;
-
-    private void OnEnable()
+    public void CreateDefault()
     {
-        if (MoneyVisitor != null)
+        _currecncies.Add(new Metal("металлы", 10));
+        _currecncies.Add(new Energy("энергия", 0));
+        _currecncies.Add(new Fuel("топливо", 20));
+    }
+
+    public void SetCurrency(IEnumerable<CurrencyData> currencyDatas)
+    {
+        foreach (var currencyData in currencyDatas)
         {
-            MoneyVisitor.ValuesChanged += OnValueChanged;
+            _currecncies.Add(currencyData);
         }
     }
 
-    private void OnDisable()
-    {
-        MoneyVisitor.ValuesChanged -= OnValueChanged;
-    }
+    public IEnumerable<CurrencyData> GetCurrecncies() => _currecncies;
 
-    public void Init(MoneyVisitor moneyVisitor)
+    public void Add(Currency currency)
     {
-        _moneyVisitor = moneyVisitor;
-        MoneyVisitor.ValuesChanged += OnValueChanged;
+        var currencyData = _currecncies.Where(elenemt => elenemt.Title == currency.Title).FirstOrDefault();
 
-        Render();
-    }
+        if (currencyData == null)
+            return;
 
-    public void Add(MoneyVisitor newMoney)
-    {
-        _moneyVisitor += newMoney;
-    }
-
-    public void OnTakeMoney(Money money)
-    {
-        money.Accept(_moneyVisitor);
-    }
-
-    private void Render()
-    {
-        _metal.text = MoneyVisitor.Metals.Value.ToString();
-        _energy.text = MoneyVisitor.Energy.Value.ToString();
-        _fuel.text = MoneyVisitor.Fuel.Value.ToString();
-    }
-
-    private void OnValueChanged()
-    {
-        Render();
+        currencyData.Add(currency);
+        OnValueChanged?.Invoke(currencyData);
     }
 }
