@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Weapon : Detail
 {
-    private const int BulletsCount = 15;
+    private const int BulletsCount = 8;
+    private const string Label = "оружие";
+    private const string DamageLabel = "наносимый урон:";
+    private const string SpeedLabel = "скорость:";
 
     [SerializeField] private int _damage;
     [SerializeField] private float _delayBetweenShoot;
@@ -58,5 +61,31 @@ public class Weapon : Detail
         }
 
         _elapsedTime = 0;
+    }
+
+    public override string GetLabel()
+    {
+        return Label;
+    }
+
+    public override string GetStats()
+    {
+        return $"{DamageLabel} {Damage}\n{SpeedLabel} {GetSpeedLabel(_bulletSpeed)}";
+    }
+
+    private string GetSpeedLabel(float speed)
+    {
+        const string low = "низкая";
+        const string medium = "средняя";
+        const string high = "высокая";
+
+        Dictionary<string, float> speedDictionary = new Dictionary<string, float>
+        {
+            { low, 1f },
+            { medium, 0.5f },
+            { high, 0f }
+        };
+
+        return speedDictionary.Where(element => speed > element.Value).First().Key;
     }
 }

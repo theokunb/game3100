@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 175325470}
   - component: {fileID: 175325471}
-  - component: {fileID: 175325472}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -165,29 +164,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 175325468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4e9e1daeb1d3e94ea21a2bdadbb62fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _packs:
-  - _enemies:
-    - {fileID: 1559024309899624952, guid: 07904129e7fc4fa45bb8bab31a416fdd, type: 3}
-    - {fileID: 1559024309899624952, guid: 07904129e7fc4fa45bb8bab31a416fdd, type: 3}
-  - _enemies:
-    - {fileID: 1559024309899624952, guid: 07904129e7fc4fa45bb8bab31a416fdd, type: 3}
-    - {fileID: 1559024309899624952, guid: 07904129e7fc4fa45bb8bab31a416fdd, type: 3}
-    - {fileID: 1559024309899624952, guid: 07904129e7fc4fa45bb8bab31a416fdd, type: 3}
-  - _enemies:
-    - {fileID: 1559024309899624952, guid: 07904129e7fc4fa45bb8bab31a416fdd, type: 3}
-    - {fileID: 1559024309899624952, guid: 07904129e7fc4fa45bb8bab31a416fdd, type: 3}
---- !u!114 &175325472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 175325468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5abfdda2bae5eb40a43b0859ac3db89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -195,6 +171,7 @@ MonoBehaviour:
   _spawner: {fileID: 1579422381}
   _playerLoader: {fileID: 242894087}
   _player: {fileID: 380437127}
+  _levelContainer: {fileID: 11400000, guid: a4bc4a9b5e6d76940a1d0e4f30cd4cef, type: 2}
 --- !u!1 &242894086
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 380437127}
+  _wallet: {fileID: 1393021824}
   _primaryCreator: {fileID: 0}
   _itemsPull: {fileID: 11400000, guid: 5a26f5016590abf4caa35c4a5b8f2fc1, type: 2}
 --- !u!4 &242894088
@@ -865,6 +843,17 @@ MonoBehaviour:
   _boundTemplate: {fileID: 3505604342049137824, guid: a73becd4cbcc54140aabe10af2457066, type: 3}
   _boundWidth: 0.2
   _boundHeight: 0.4
+--- !u!114 &1393021824 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4717713153197654984, guid: 2478e04d2c12c4048ada7b54d1bad6ba, type: 3}
+  m_PrefabInstance: {fileID: 380437126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08021b25e924d644fb96458b50c2e341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1579422380
 GameObject:
   m_ObjectHideFlags: 0

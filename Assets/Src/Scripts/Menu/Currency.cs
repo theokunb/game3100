@@ -3,6 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Currency", order = 51)]
 public class Currency : ScriptableObject
 {
+    public static string FuelTitle = "топливо";
+    public static string EnegyTitle = "энергия";
+    public static string MetalTitle = "металлы";
+
     [SerializeField] private string _title;
     [SerializeField] private int _minCount;
     [SerializeField] private int _maxCount;

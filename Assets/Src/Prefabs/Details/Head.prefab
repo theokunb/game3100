@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4448793257019659404}
   - component: {fileID: 4674894860736322229}
   - component: {fileID: 3664450977761798975}
+  - component: {fileID: 7284831966746504743}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -63,9 +64,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: "\u0420\u043E\u0431\u043E \u0433\u043E\u043B\u043E\u0432\u0430"
-  _level: 1
-  _isAvailable: 1
+  _description: "\u0431\u043E\u0435\u0432\u043E\u0439 \u0441\u043A\u0430\u043D\u043D\u0435\u0440"
   _upperPlaceOfDetail: {fileID: 0}
+  _bonusHealth: 50
   _scannerRadius: 5
 --- !u!65 &4674894860736322229
 BoxCollider:
@@ -93,6 +94,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: cac84844f786b9845978de8ae402cb13, type: 3}
+  _prices: []
+--- !u!114 &7284831966746504743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4448793257019659406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384fbedb2df7d71449ce05d6a354f625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isAvailable: 1
+  _inShop: 1
 --- !u!1 &4448793259046870558
 GameObject:
   m_ObjectHideFlags: 0

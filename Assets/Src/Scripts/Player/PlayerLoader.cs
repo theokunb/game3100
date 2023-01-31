@@ -8,22 +8,19 @@ public class PlayerLoader : MonoBehaviour
     [SerializeField] private PrimaryPlayerCreator _primaryCreator;
     [SerializeField] private ItemsPull _itemsPull;
 
+    private PlayerProgress _playerProgress;
+
+    public PlayerProgress PlayerProgress => _playerProgress;
+
     private void Awake()
     {
-        if(TryLoadData(out PlayerData playerData))
-        {
-            LoadPlayer(playerData);
-        }
-        else
-        {
-            _primaryCreator.CreateDefaultPlayer();
-            _primaryCreator.CreateDefaultWallet();
-        }
+        ProccessPlayerData();
+        ProccessPlayerProgress();
     }
 
-    public bool TryLoadData<T>(out T data)
+    public bool TryLoadData<T>(out T data,string fileName)
     {
-        data = GameStorage.LoadData<T>();
+        data = GameStorage.LoadData<T>(fileName);
 
         return data != null;
     }
@@ -42,5 +39,33 @@ public class PlayerLoader : MonoBehaviour
     private Detail FindDetail(DetailData detailData)
     {
         return _itemsPull.Details.Where(detail => detail.Title == detailData.Title).FirstOrDefault();
+    }
+
+    private void ProccessPlayerData()
+    {
+        if (TryLoadData(out PlayerData playerData, GameStorage.PlayerData))
+        {
+            LoadPlayer(playerData);
+        }
+        else
+        {
+            _primaryCreator.CreateDefaultPlayer();
+            _primaryCreator.CreateDefaultWallet();
+        }
+    }
+
+    private void ProccessPlayerProgress()
+    {
+        if(TryLoadData(out _playerProgress, GameStorage.PlayerProgress))
+        {
+
+        }
+        else
+        {
+            _playerProgress = new PlayerProgress();
+            GameStorage.Save(_playerProgress, GameStorage.PlayerProgress);
+        }
+
+        _playerProgress.VisitGame();
     }
 }

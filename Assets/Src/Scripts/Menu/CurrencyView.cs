@@ -13,6 +13,8 @@ public class CurrencyView : MonoBehaviour
     private void OnEnable()
     {
         _wallet.OnValueChanged += OnValueChanged;
+
+        UpdateCurrencies();
     }
 
     private void OnDisable()
@@ -45,5 +47,14 @@ public class CurrencyView : MonoBehaviour
         }
 
         changedelement.Render(currencyData);
+    }
+
+    private void UpdateCurrencies()
+    {
+        foreach(var currency in _wallet.GetCurrecncies())
+        {
+            var displayCurrency = _objects.Where(element => element.Title == currency.Title).FirstOrDefault();
+            displayCurrency?.Render(currency);
+        }
     }
 }

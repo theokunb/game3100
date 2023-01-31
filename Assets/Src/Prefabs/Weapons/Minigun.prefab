@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 7008777911311245525}
   - component: {fileID: 678180699317177953}
   - component: {fileID: 7607198463393470810}
+  - component: {fileID: 7992275215848762056}
   m_Layer: 0
   m_Name: Minigun
   m_TagString: Untagged
@@ -163,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: "\u043C\u0438\u043D\u0438\u0433\u0430\u043D"
-  _isAvailable: 1
+  _description: "\u0445\u043E\u0440\u043E\u0448\u0435\u0435 \u043E\u0440\u0443\u0436\u0438\u0435"
   _damage: 8
   _delayBetweenShoot: 0.1
   _shootPlace: {fileID: 7008777911112941734}
@@ -182,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 9e700142db77c5d44a878c62539e8e08, type: 3}
+  _prices: []
 --- !u!65 &7607198463393470810
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -195,3 +197,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7992275215848762056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7008777911311245523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384fbedb2df7d71449ce05d6a354f625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isAvailable: 1
+  _inShop: 1

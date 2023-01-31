@@ -4,6 +4,9 @@ using System.Linq;
 
 public class Body : RobotDetail
 {
+    private const string Label = "Тело";
+    private const string WeaponSlots = "ячеек оружий:";
+
     private List<Weapon> _weapons = new List<Weapon>();
     private WeaponPlace[] _weaponPlaces;
 
@@ -38,5 +41,15 @@ public class Body : RobotDetail
 
         newWeapons.Clear();
         newWeapons.AddRange(_weapons.Where(weapon => weapon != null));
+    }
+
+    public override string GetLabel()
+    {
+        return Label;
+    }
+
+    public override string GetSpecialStats()
+    {
+        return $"{WeaponSlots} {_weaponPlaces.Length}";
     }
 }

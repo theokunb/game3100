@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2006121398951761487}
   - component: {fileID: 3975110608104388826}
   - component: {fileID: 5938302869451369957}
+  - component: {fileID: 5896626665692385188}
   m_Layer: 0
   m_Name: Body2
   m_TagString: Untagged
@@ -53,9 +54,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: "\u0420\u043E\u0431\u043E \u0433\u0440\u0443\u0434\u044C"
-  _level: 1
-  _isAvailable: 1
+  _description: "\u0438\u0437\u043D\u043E\u0448\u0435\u043D\u043D\u0430\u044F \u0431\u0440\u043E\u043D\u044F,
+    \u0441 \u043D\u0435\u0444\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0438\u0440\u0443\u044E\u0449\u0435\u0439
+    \u043E\u0434\u043D\u043E\u0439 \u0440\u0443\u043A\u043E\u0439"
   _upperPlaceOfDetail: {fileID: 2006121399991386419}
+  _bonusHealth: 150
 --- !u!65 &3975110608104388826
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -82,6 +85,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: a551d8ed0a2ffda4e920cd079a6beb31, type: 3}
+  _prices: []
+--- !u!114 &5896626665692385188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006121398951761481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384fbedb2df7d71449ce05d6a354f625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isAvailable: 1
+  _inShop: 1
 --- !u!1 &2006121398991806421
 GameObject:
   m_ObjectHideFlags: 0

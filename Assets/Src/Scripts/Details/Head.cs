@@ -4,6 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 public class Head : RobotDetail
 {
+    private const string Label = "голова";
+    private const string Radius = "дальность видимости:";
+
     [SerializeField] private float _scannerRadius;
 
     private CapsuleCollider _scannerCollider;
@@ -33,5 +36,15 @@ public class Head : RobotDetail
         {
             EnemyLost?.Invoke(enemy);
         }
+    }
+
+    public override string GetLabel()
+    {
+        return Label;
+    }
+
+    public override string GetSpecialStats()
+    {
+        return $"{Radius} {_scannerRadius}m";
     }
 }

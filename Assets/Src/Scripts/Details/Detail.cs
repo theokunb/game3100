@@ -1,21 +1,28 @@
 using UnityEngine;
 
 [RequireComponent(typeof(DetailShop))]
-public class Detail : MonoBehaviour
+[RequireComponent(typeof(DetailStatus))]
+public abstract class Detail : MonoBehaviour
 {
     [SerializeField] private string _title;
-    [SerializeField] private bool _isAvailable;
+    [SerializeField] private string _description;
 
     public string Title => _title;
-    public bool IsAvailable => _isAvailable;
+    public string Description => _description;
+    public bool IsAvailable => GetComponent<DetailStatus>().IsAvailable;
+    public bool CanBuyInShop => GetComponent<DetailStatus>().CanBuyInShop;
 
     public void SetPosition(Transform target)
     {
         transform.position = target.position;
     }
 
-    public void Unlock()
+    public void Buy()
     {
-        _isAvailable = true;
+        GetComponent<DetailStatus>().Buy();
     }
+
+    public abstract string GetLabel();
+
+    public abstract string GetStats();
 }

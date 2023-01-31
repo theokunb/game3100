@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(Player))]
 public class Wallet : MonoBehaviour
 {
     private List<CurrencyData> _currecncies = new List<CurrencyData>();
@@ -11,9 +12,9 @@ public class Wallet : MonoBehaviour
 
     public void CreateDefault()
     {
-        _currecncies.Add(new Metal("металлы", 10));
-        _currecncies.Add(new Energy("энергия", 0));
-        _currecncies.Add(new Fuel("топливо", 20));
+        _currecncies.Add(new CurrencyData(Currency.MetalTitle, 1000));
+        _currecncies.Add(new CurrencyData(Currency.EnegyTitle, 1000));
+        _currecncies.Add(new CurrencyData(Currency.FuelTitle, 2000));
     }
 
     public void SetCurrency(IEnumerable<CurrencyData> currencyDatas)
@@ -26,14 +27,47 @@ public class Wallet : MonoBehaviour
 
     public IEnumerable<CurrencyData> GetCurrecncies() => _currecncies;
 
-    public void Add(Currency currency)
+    public bool CanBuy(IEnumerable<CurrencyData> currencyDatas)
     {
-        var currencyData = _currecncies.Where(elenemt => elenemt.Title == currency.Title).FirstOrDefault();
+        foreach(var currency in currencyDatas)
+        {
+            var currecy = _currecncies.Where(element => element.Title == currency.Title);
 
-        if (currencyData == null)
-            return;
+            if(currecy.Count() > 1)
+            {
+                return false;
+            }
 
-        currencyData.Add(currency);
-        OnValueChanged?.Invoke(currencyData);
+            if (currecy.FirstOrDefault().Count < currency.Count)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void Buy(ItemShopView item)
+    {
+        Pay(item.Price);
+        Unlock(item.Detail);
+
+        GameStorage.Save(new PlayerData(GetComponent<Player>()), GameStorage.PlayerData);
+    }
+
+    private void Pay(IEnumerable<CurrencyData> currencyDatas)
+    {
+        foreach(var currency in currencyDatas)
+        {
+            var myCurrency = _currecncies.Where(element => element.Title == currency.Title).FirstOrDefault();
+            myCurrency.Decrease(currency);
+
+            OnValueChanged?.Invoke(myCurrency);
+        }
+    }
+
+    private void Unlock(Detail detail)
+    {
+        detail.Buy();   
     }
 }

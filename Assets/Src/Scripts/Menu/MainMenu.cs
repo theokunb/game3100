@@ -25,6 +25,6 @@ public class MainMenu : MonoBehaviour
 
     private void OnPlayClicked()
     {
-        GameScene.Load();
+        GameScene.Load(0);
     }
 }
