@@ -17,6 +17,20 @@ public class PlayerProgress
         _levelCompletedInDay = new Dictionary<int, int>();
     }
 
+    public int CompletedLevels => _completedLevels;
+
+    public LevelStatus GetStatus(int levelId)
+    {
+        if (_levelCompletedInDay.Keys.Contains(levelId))
+        {
+            return new LevelStatus(_completedLevels >= levelId, _levelCompletedInDay[levelId]);
+        }
+        else
+        {
+            return new LevelStatus(_completedLevels >= levelId, 0);
+        }
+    }
+
     public bool HasRewardFor(int level)
     {
         return _levelCompletedInDay.Keys.Contains(level) == false || _levelCompletedInDay[level] < MaxFarmLevelInDay;
@@ -35,6 +49,8 @@ public class PlayerProgress
 
         AddProgress(idLevel);
         VisitGame();
+
+        GameStorage.Save(this, GameStorage.PlayerProgress);
     }
 
     public void VisitGame()
@@ -42,7 +58,7 @@ public class PlayerProgress
         if ((DateTime.Now - _lastGamedDay.Date).Days >= 1)
         {
             _lastGamedDay = DateTime.Now;
-            _levelCompletedInDay.Clear();
+            _levelCompletedInDay = new Dictionary<int, int>();
         }
     }
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Level/Level Container", order = 51)]
@@ -7,7 +8,7 @@ public class LevelsContainer : ScriptableObject
 
     public Level GetLevel(int id)
     {
-        if(id< _levels.Length)
+        if (id < _levels.Length)
         {
             return _levels[id];
         }
@@ -16,4 +17,6 @@ public class LevelsContainer : ScriptableObject
             return null;
         }
     }
+
+    public IEnumerable<Level> Levels => _levels;
 }

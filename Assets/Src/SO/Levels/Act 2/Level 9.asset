@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ebea7e1c5238c14591d697a92751782, type: 3}
-  m_Name: Level 1
+  m_Name: Level 9
   m_EditorClassIdentifier: 
-  _id: 1
+  _id: 9
+  _title: "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0435\u043D\u0438\u0435"
   _width: 10
   _lenght: 30
   _enemies:
@@ -35,3 +36,4 @@ MonoBehaviour:
   _reward:
   - {fileID: 11400000, guid: c797c80f99bca064485508690e621e74, type: 2}
   _rewardCountInDay: 3
+  _icon: {fileID: 21300000, guid: cac84844f786b9845978de8ae402cb13, type: 3}
