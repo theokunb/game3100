@@ -11,8 +11,8 @@ public class Head : RobotDetail
 
     private CapsuleCollider _scannerCollider;
 
-    public event Action<Enemy> EnemyDetected;
-    public event Action<Enemy> EnemyLost;
+    public event Action<Character> EnemyDetected;
+    public event Action<Character> EnemyLost;
 
     public int ScannerRadius => (int)_scannerRadius;
 
@@ -24,7 +24,7 @@ public class Head : RobotDetail
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out Enemy enemy))
+        if(other.gameObject.TryGetComponent(out Character enemy))
         {
             EnemyDetected?.Invoke(enemy);
         }
@@ -32,7 +32,7 @@ public class Head : RobotDetail
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out Enemy enemy))
+        if(other.gameObject.TryGetComponent(out Character enemy))
         {
             EnemyLost?.Invoke(enemy);
         }

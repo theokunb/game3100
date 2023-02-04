@@ -59,7 +59,7 @@ public class InventoryObserver : MonoBehaviour
     {
         var detail = detailView.DetailShop.GetComponent<Detail>();
         _player.SetDetail((dynamic)detail);
-        _player.CorrectDetails();
+        _player.CorrectDetails(_player.LegPosition);
         _player.Save();
     }
 }

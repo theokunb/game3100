@@ -34,7 +34,10 @@ public class Bullet : MonoBehaviour
         {
             if (character.GetType() != _owner.GetType())
             {
-                character.TakeDamage(_damage);
+                var health = character.GetComponent<Health>();
+                health.TakeDamage(_damage);
+
+                character.SetWhoAttacked(_owner);
                 ResetBullet();
             }
         }

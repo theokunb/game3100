@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class LevelCreator : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] private GameObject _boundTemplate;
     [SerializeField] private float _boundWidth;
     [SerializeField] private float _boundHeight;
+    [SerializeField] private NavMeshSurface _navMesh;
 
     private int _platformWidth;
     private int _platformLenght;
@@ -16,6 +18,7 @@ public class LevelCreator : MonoBehaviour
         var randomIndex = Random.Range(0, _terrains.Length);
         var terrain = Instantiate(_terrains[randomIndex]);
         terrain.terrainData.size = new Vector3(_platformWidth, _platformHeight, _platformLenght);
+        _navMesh.BuildNavMesh();
     }
 
     private void CreateBounds()
