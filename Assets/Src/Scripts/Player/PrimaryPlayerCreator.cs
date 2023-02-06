@@ -7,13 +7,14 @@ public class PrimaryPlayerCreator : MonoBehaviour
     [SerializeField] private Body _defaultBody;
     [SerializeField] private Head _defaultHead;
     [SerializeField] private Weapon _defaultWeapon;
-    [SerializeField] private Wallet _wallet;
+    [SerializeField] private PlayerWallet _playerWallet;
 
     public void CreateDefaultPlayer()
     {
         _player.SetDetail(_defaultLeg);
         _player.SetDetail(_defaultBody);
         _player.SetDetail(_defaultHead);
+        CreateDefaultWallet();
 
         foreach (var weaponPlace in _player.WeaponPlaces)
         {
@@ -21,8 +22,8 @@ public class PrimaryPlayerCreator : MonoBehaviour
         }
     }
 
-    public void CreateDefaultWallet()
+    private void CreateDefaultWallet()
     {
-        _wallet.CreateDefault();
+        _playerWallet.CreateDefault();
     }
 }

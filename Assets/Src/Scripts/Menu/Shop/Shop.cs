@@ -74,11 +74,13 @@ public class Shop : MonoBehaviour
 
     private void OnDialogResult(ItemShopView item,bool result)
     {
-        if(result == false)
+        _buyWindow.DialogResult -= OnDialogResult;
+
+        if (result == false)
         {
             return;
         }
-
+        
         Destroy(item.gameObject);
     }
 }

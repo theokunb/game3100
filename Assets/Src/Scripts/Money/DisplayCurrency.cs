@@ -1,15 +1,15 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DisplayCurrency : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _text;
-    [SerializeField] private CurrencyType _currencyType;
+    [SerializeField] private Image _image;
+    [SerializeField] private TMP_Text _value;
 
-    public string Title => Currency.GetTitle(_currencyType);
-
-    public void Render(CurrencyData currencyData)
+    public void Render(Sprite icon, Currency currency)
     {
-        _text.text = currencyData.Count.ToString();
+        _image.sprite = icon;
+        _value.text = currency.Count.ToString();
     }
 }

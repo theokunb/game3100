@@ -33,7 +33,6 @@ MonoBehaviour:
     - {fileID: 6271963157667777218, guid: e69e2bfa9cf7e2a498a71ba6cbc3c146, type: 3}
     - {fileID: 6271963157667777218, guid: e69e2bfa9cf7e2a498a71ba6cbc3c146, type: 3}
     - {fileID: 6271963157667777218, guid: e69e2bfa9cf7e2a498a71ba6cbc3c146, type: 3}
-  _reward:
-  - {fileID: 11400000, guid: c797c80f99bca064485508690e621e74, type: 2}
   _rewardCountInDay: 3
   _icon: {fileID: 21300000, guid: cac84844f786b9845978de8ae402cb13, type: 3}
+  _reward: []

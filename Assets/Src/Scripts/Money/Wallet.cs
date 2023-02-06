@@ -1,80 +1,112 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 
-[RequireComponent(typeof(Player))]
-public class Wallet : MonoBehaviour
+[Serializable]
+public class Wallet : IWallet
 {
-    private List<CurrencyData> _currecncies = new List<CurrencyData>();
+    private const int StartValue = 2000;
 
-    public event Action<CurrencyData> OnValueChanged;
+    private Currency _metal;
+    private Currency _energy;
+    private Currency _fuel;
 
-    public void CreateDefault()
+    public Wallet()
     {
-        _currecncies.Add(new CurrencyData(Currency.GetTitle(CurrencyType.Metal), 1000));
-        _currecncies.Add(new CurrencyData(Currency.GetTitle(CurrencyType.Energy), 1000));
-        _currecncies.Add(new CurrencyData(Currency.GetTitle(CurrencyType.Fuel), 2000));
+        _metal = new Metal(StartValue);
+        _energy = new Energy(StartValue);
+        _fuel= new Fuel(StartValue);
     }
 
-    public void SetCurrency(IEnumerable<CurrencyData> currencyDatas)
+    public Currency Metal => _metal;
+    public Currency Energy => _energy;
+    public Currency Fuel => _fuel;
+
+    public IEnumerable<Currency> GetCurrencies()
     {
-        foreach (var currencyData in currencyDatas)
+        yield return _metal;
+        yield return _energy;
+        yield return _fuel;
+    }
+
+    public void Increase(params Currency[] values)
+    {
+        foreach(var value in values)
         {
-            _currecncies.Add(currencyData);
+            Increase(value);
         }
     }
 
-    public void Add(Currency value)
+    public void Increase(IEnumerable<Currency> currencies)
     {
-        var currency = _currecncies.Where(element => element.Title == value.Title).FirstOrDefault();
-
-        if(currency == null)
+        foreach(var currency in currencies)
         {
-            return;
-        }
-
-        currency.Increase(new CurrencyData(value.Title, value.GetCount()));
-    }
-
-    public IEnumerable<CurrencyData> GetCurrecncies() => _currecncies;
-
-    public bool CanBuy(IEnumerable<CurrencyData> currencyDatas)
-    {
-        foreach(var currency in currencyDatas)
-        {
-            var currecy = _currecncies.Where(element => element.Title == currency.Title);
-
-            if(currecy.Count() > 1)
-            {
-                return false;
-            }
-
-            if (currecy.FirstOrDefault().Count < currency.Count)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public void Buy(ItemShopView item)
-    {
-        Pay(item.Price);
-        item.Detail.Unlock();
-
-        GameStorage.Save(new PlayerData(GetComponent<Player>()), GameStorage.PlayerData);
-    }
-
-    private void Pay(IEnumerable<CurrencyData> currencyDatas)
-    {
-        foreach(var currency in currencyDatas)
-        {
-            var myCurrency = _currecncies.Where(element => element.Title == currency.Title).FirstOrDefault();
-            myCurrency.Decrease(currency);
-
-            OnValueChanged?.Invoke(myCurrency);
+            Increase(currency);
         }
     }
+
+    public void Decrease(params Currency[] values)
+    {
+        foreach (var value in values)
+        {
+            Decrease(value);
+        }
+    }
+
+    public void Decrease(IEnumerable<Currency> currencies)
+    {
+        foreach (var currency in currencies)
+        {
+            Decrease(currency);
+        }
+    }
+
+    public void Increase(Currency currency)
+    {
+        Add((dynamic)currency);
+    }
+
+    public void Decrease(Currency currency)
+    {
+        Reduce((dynamic)currency);
+    }
+
+    public void Add(Metal metal)
+    {
+        _metal.Increase(metal);
+    }
+
+    public void Add(Energy energy)
+    {
+        _energy.Increase(energy);
+    }
+
+    public void Reduce(Metal metal)
+    {
+        _metal.Reduce(metal);
+    }
+
+    public void Reduce(Energy energy)
+    {
+        _energy.Reduce(energy);
+    }
+
+    public void Add(Fuel fuel)
+    {
+        _fuel.Increase(fuel);
+    }
+
+    public void Reduce(Fuel fuel)
+    {
+        _fuel.Reduce(fuel);
+    }
+}
+
+public interface IWallet
+{
+    void Add(Metal metal);
+    void Add(Energy energy);
+    void Add(Fuel fuel);
+    void Reduce(Metal metal);
+    void Reduce(Energy energy);
+    void Reduce(Fuel fuel);
 }

@@ -23,10 +23,10 @@ MonoBehaviour:
   - _enemies:
     - {fileID: 6271963157667777218, guid: e69e2bfa9cf7e2a498a71ba6cbc3c146, type: 3}
     - {fileID: 6271963157667777218, guid: e69e2bfa9cf7e2a498a71ba6cbc3c146, type: 3}
-  _reward:
-  - {fileID: 11400000, guid: c797c80f99bca064485508690e621e74, type: 2}
   _rewardCountInDay: 3
   _icon: {fileID: 21300000, guid: cac84844f786b9845978de8ae402cb13, type: 3}
-  _rewards:
-  - {fileID: 11400000, guid: 3df1580de0bc8e841b053d755f1c7060, type: 2}
-  - {fileID: 11400000, guid: c797c80f99bca064485508690e621e74, type: 2}
+  _reward:
+  - _currencyType: 0
+    _count: 50
+  - _currencyType: 1
+    _count: 40

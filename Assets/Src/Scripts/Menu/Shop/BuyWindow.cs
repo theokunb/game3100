@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class BuyWindow : MonoBehaviour
 {
@@ -14,9 +12,8 @@ public class BuyWindow : MonoBehaviour
     [SerializeField] private TMP_Text _stats;
     [SerializeField] private TMP_Text _description;
     [SerializeField] private Button _buyButton;
-    [SerializeField] private TMP_Text _price;
     [SerializeField] private Button _closeButton;
-    [SerializeField] private Wallet _wallet;
+    [SerializeField] private PlayerWallet _playerWallet;
 
     private ItemShopView _item;
 
@@ -40,31 +37,25 @@ public class BuyWindow : MonoBehaviour
         _image.sprite = item.Image.sprite;
         _title.text = item.Detail.Title;
         _stats.text = item.Detail.GetStats();
-        _description.text = item.Detail.Description;
-        _price.text = MakePrice(item.Price);
-        SetActiveBuyButton(item.Price);
+        _description.text = $"{item.Detail.Description}\n{GetPriceDescription(item.FullPrice)}";
+        _buyButton.interactable = _playerWallet.CanBuy(item.FullPrice);
     }
 
-    private void SetActiveBuyButton(IEnumerable<CurrencyData> currencyDatas)
+    private string GetPriceDescription(IEnumerable<Currency> price)
     {
-        _buyButton.interactable = _wallet.CanBuy(currencyDatas);
-    }
+        StringBuilder builder = new StringBuilder("стоимость:\n");
 
-    private string MakePrice(IEnumerable<CurrencyData> currencyDatas)
-    {
-        StringBuilder priceText = new StringBuilder();
-
-        foreach (var price in currencyDatas)
+        foreach (Currency currency in price)
         {
-            priceText.Append($"{price.Title} {price.Count} ");
+            builder.Append($"{currency.Title}: {currency.Count}\n");
         }
 
-        return priceText.ToString();
+        return builder.ToString();
     }
 
     private void OnBuyClicked()
     {
-        _wallet.Buy(_item);
+        _playerWallet.Buy(_item);
         DialogResult?.Invoke(_item, true);
         gameObject.SetActive(false);
     }

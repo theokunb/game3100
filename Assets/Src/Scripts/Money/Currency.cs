@@ -1,40 +1,67 @@
-using UnityEngine;
+using System;
 
-[CreateAssetMenu(menuName = "Currency", order = 51)]
-public class Currency : ScriptableObject
+[Serializable]
+public abstract class Currency
 {
-    [SerializeField] private CurrencyDroped _template;
-    [SerializeField] private CurrencyType _currencyType;
-    [SerializeField] private int _minCount;
-    [SerializeField] private int _maxCount;
+    private int _count;
 
-    public string Title => GetTitle(_currencyType);
-
-    public int GetCount() => Random.Range(_minCount, _maxCount);
-
-    public static string GetTitle(CurrencyType currencyType)
+    protected Currency(int count)
     {
-        const string FuelTitle = "топливо";
-        const string EnegyTitle = "энергия";
-        const string MetalTitle = "металлы";
+        _count = count;
+    }
 
-        switch (currencyType)
+    public int Count => _count;
+    public abstract string Title { get; }
+
+    public void Increase(Currency currency)
+    {
+        if (currency != null)
         {
-            case CurrencyType.Metal:
-                return MetalTitle;
-            case CurrencyType.Fuel:
-                return FuelTitle;
-            case CurrencyType.Energy:
-                return EnegyTitle;
-            default:
-                return default;
+            _count += currency.Count;
         }
     }
 
-    public CurrencyDroped CreateObject()
+    public void Reduce(Currency currency)
     {
-        var createdCurrencyObject = Instantiate(_template);
-        createdCurrencyObject.Initialize(_currencyType, GetCount());
-        return createdCurrencyObject;
+        if (currency != null)
+        {
+            _count -= currency.Count;
+        }
     }
+}
+
+[Serializable]
+public class Metal : Currency
+{
+    private const string CurrencyTitle = "метал";
+
+    public Metal(int count) : base(count)
+    {
+    }
+
+    public override string Title => CurrencyTitle;
+}
+
+[Serializable]
+public class Energy : Currency
+{
+    private const string CurrencyTitle = "энерния";
+
+    public Energy(int count) : base(count)
+    {
+    }
+
+    public override string Title => CurrencyTitle;
+}
+
+[Serializable]
+public class Fuel : Currency
+{
+    private const string CurrencyTitle = "топливо";
+
+    public Fuel(int count) : base(count)
+    {
+    }
+
+    public override string Title => CurrencyTitle;
 }

@@ -10,9 +10,6 @@ public class FinishMenu : MonoBehaviour
     [SerializeField] private MenuBackground _menuBackground;
     [SerializeField] private ItemView _itemViewTemplate;
     [SerializeField] private GameObject _itemsContainer;
-    [SerializeField] private DisplayCurrency _energyView;
-    [SerializeField] private DisplayCurrency _fuelView;
-    [SerializeField] private DisplayCurrency _metalView;
     [SerializeField] private GameObject _currencyContainer;
     [SerializeField] private Game _game;
     [SerializeField] private Button _homeButton;
@@ -41,7 +38,6 @@ public class FinishMenu : MonoBehaviour
 
     public void SetRewards(Bag playerBag)
     {
-        var reward = _game.CurrentLevel.Rewards;
 
         DisplayItems(playerBag.PopDetails());
     }

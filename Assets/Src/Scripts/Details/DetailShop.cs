@@ -9,16 +9,11 @@ public class DetailShop : MonoBehaviour
 
     public Sprite Icon => _icon;
 
-    public IEnumerable<CurrencyData> GetPrice()
+    public IEnumerable<Currency> GetCurrencies()
     {
-        foreach (var price in _prices)
+        foreach(var price in _prices)
         {
-            yield return GetPrice(price);
+            yield return price.ToCurrency();
         }
-    }
-
-    private CurrencyData GetPrice(Price price)
-    {
-        return new CurrencyData(Currency.GetTitle(price.CurrencyType), price.Count);
     }
 }

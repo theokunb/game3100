@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerLoader : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private Wallet _wallet;
     [SerializeField] private PrimaryPlayerCreator _primaryCreator;
     [SerializeField] private ItemsPull _itemsPull;
 
@@ -33,7 +32,7 @@ public class PlayerLoader : MonoBehaviour
             _player.SetDetail((dynamic)detail);
         }
 
-        _wallet.SetCurrency(playerData.GetCurrency());
+        _player.GetComponent<PlayerWallet>().SetWallet(playerData.Wallet);
     }
 
     private Detail FindDetail(DetailData detailData)
@@ -50,7 +49,6 @@ public class PlayerLoader : MonoBehaviour
         else
         {
             _primaryCreator.CreateDefaultPlayer();
-            _primaryCreator.CreateDefaultWallet();
         }
     }
 

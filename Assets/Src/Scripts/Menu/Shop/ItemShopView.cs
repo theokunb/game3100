@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +7,10 @@ public class ItemShopView : MonoBehaviour
 {
     [SerializeField] private Button _buyButton;
     [SerializeField] private Image _image;
-    [SerializeField] private Sprite _lockedIcon;
 
     public event Action<ItemShopView> BuyButtonClicked;
 
-    public IEnumerable<CurrencyData> Price { get; private set; }
+    public IEnumerable<Currency> FullPrice { get; private set; }
     public Detail Detail { get; private set; }
     public Image Image => _image;
 
@@ -31,7 +28,7 @@ public class ItemShopView : MonoBehaviour
     {
         _image.sprite = detailShop.Icon;
         Detail = detailShop.GetComponent<Detail>();
-        Price = detailShop.GetPrice();
+        FullPrice = detailShop.GetCurrencies();
     }
 
     private void OnBuyClicked()

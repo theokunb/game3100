@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -10,6 +9,24 @@ public class Price
 
     public CurrencyType CurrencyType => _currencyType;
     public int Count => _count;
+}
+
+public static class PriceExtension
+{
+    public static Currency ToCurrency(this Price price)
+    {
+        switch (price.CurrencyType)
+        {
+            case CurrencyType.Metal:
+                return new Metal(price.Count);
+            case CurrencyType.Energy:
+                return new Energy(price.Count);
+            case CurrencyType.Fuel:
+                return new Fuel(price.Count);
+            default:
+                return null;
+        }
+    }
 }
 
 public enum CurrencyType
