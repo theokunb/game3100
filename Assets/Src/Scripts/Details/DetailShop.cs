@@ -19,16 +19,6 @@ public class DetailShop : MonoBehaviour
 
     private CurrencyData GetPrice(Price price)
     {
-        switch (price.CurrencyType)
-        {
-            case CurrencyType.Metal:
-                return new CurrencyData(Currency.MetalTitle, price.Count);
-            case CurrencyType.Fuel:
-                return new CurrencyData(Currency.FuelTitle, price.Count);
-            case CurrencyType.Energy:
-                return new CurrencyData(Currency.EnegyTitle, price.Count);
-            default:
-                return null;
-        }
+        return new CurrencyData(Currency.GetTitle(price.CurrencyType), price.Count);
     }
 }

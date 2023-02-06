@@ -27,6 +27,8 @@ public class Pack
         }
     }
 
+    public int GetCount() => _enemies.Length;
+
     public void SubscribeOnDetection()
     {
         foreach(var enemy in _createdEnemies)

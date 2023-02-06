@@ -64,6 +64,8 @@ public class PlayerProgress
 
     private void AddProgress(int completedLevel)
     {
+        completedLevel++;
+
         if (_completedLevels < completedLevel)
         {
             _completedLevels = completedLevel;

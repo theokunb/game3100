@@ -8,7 +8,6 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private WeaponView _template;
     [SerializeField] private Button _closeButton;
     [SerializeField] private GameObject _weaponContainer;
-    [SerializeField] private bool _spawnDrop;
 
     private void OnEnable()
     {
@@ -34,7 +33,7 @@ public class WeaponManager : MonoBehaviour
 
     private void OnRemoveClicked(WeaponView weaponView)
     {
-        _player.DropWeapon(weaponView.Weapon, _spawnDrop);
+        _player.DropWeapon(weaponView.Weapon);
         Destroy(weaponView.Weapon.gameObject);
         weaponView.RemoveClicked -= OnRemoveClicked;
         Destroy(weaponView.gameObject);

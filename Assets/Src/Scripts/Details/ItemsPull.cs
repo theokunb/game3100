@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Details", menuName = "ItemsPull", order = 51)]
@@ -10,8 +8,11 @@ public class ItemsPull : ScriptableObject
 
     public IEnumerable<Detail> Details => _details;
 
-    public void AddDetail(Detail detail)
+    public DetailDropped GetRandomDetail()
     {
-        _details.Add(detail);
+        int index = Random.Range(0, _details.Count);
+        DetailDropped detailDropped = _details[index].GetComponent<BoxDetail>().Boxing();
+        detailDropped.Initialize(_details[index]);
+        return detailDropped;
     }
 }

@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 6271963157667777218}
   - component: {fileID: 1207519048168996333}
   - component: {fileID: 7484638206864652310}
+  - component: {fileID: 9061065804191645722}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Untagged
@@ -164,6 +165,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 4630258042058543663}
+--- !u!114 &9061065804191645722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271963157667777220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e43e6de3e976c6e4496f265e13e5b918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currency:
+  - {fileID: 11400000, guid: d02032d1ad5416c499bc99b361bfb521, type: 2}
+  - {fileID: 11400000, guid: c797c80f99bca064485508690e621e74, type: 2}
+  - {fileID: 11400000, guid: 3df1580de0bc8e841b053d755f1c7060, type: 2}
+  _dropItems: {fileID: 11400000, guid: d849344793b796543a0a1897df590f90, type: 2}
 --- !u!1001 &5745020483231947457
 PrefabInstance:
   m_ObjectHideFlags: 0

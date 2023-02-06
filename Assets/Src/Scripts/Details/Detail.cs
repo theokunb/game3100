@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(DetailShop))]
 [RequireComponent(typeof(DetailStatus))]
+[RequireComponent(typeof(BoxDetail))]
 public abstract class Detail : MonoBehaviour
 {
     [SerializeField] private string _title;
@@ -17,9 +18,9 @@ public abstract class Detail : MonoBehaviour
         transform.position = target.position;
     }
 
-    public void Buy()
+    public void Unlock()
     {
-        GetComponent<DetailStatus>().Buy();
+        GetComponent<DetailStatus>().Unlock();
     }
 
     public abstract string GetLabel();

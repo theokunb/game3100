@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e70a86e5cd92d4298e42adde05c13a, type: 3}
   m_Name: LowFuel
   m_EditorClassIdentifier: 
-  _title: "\u0442\u043E\u043F\u043B\u0438\u0432\u043E"
+  _template: {fileID: 4569543630479928327, guid: 56e326eba1881d64d83ed966b9ed215b, type: 3}
+  _currencyType: 0
   _minCount: 5
   _maxCount: 20

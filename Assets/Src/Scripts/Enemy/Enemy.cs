@@ -7,6 +7,7 @@ using UnityEngine.TextCore.Text;
 
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Reward))]
 public class Enemy : Character
 {
     [SerializeField] private Leg _newLeg;

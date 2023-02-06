@@ -50,6 +50,6 @@ public class Body : RobotDetail
 
     public override string GetSpecialStats()
     {
-        return $"{WeaponSlots} {_weaponPlaces.Length}";
+        return $"{WeaponSlots} {GetComponentsInChildren<WeaponPlace>().Length}";
     }
 }

@@ -12,9 +12,9 @@ public class Wallet : MonoBehaviour
 
     public void CreateDefault()
     {
-        _currecncies.Add(new CurrencyData(Currency.MetalTitle, 1000));
-        _currecncies.Add(new CurrencyData(Currency.EnegyTitle, 1000));
-        _currecncies.Add(new CurrencyData(Currency.FuelTitle, 2000));
+        _currecncies.Add(new CurrencyData(Currency.GetTitle(CurrencyType.Metal), 1000));
+        _currecncies.Add(new CurrencyData(Currency.GetTitle(CurrencyType.Energy), 1000));
+        _currecncies.Add(new CurrencyData(Currency.GetTitle(CurrencyType.Fuel), 2000));
     }
 
     public void SetCurrency(IEnumerable<CurrencyData> currencyDatas)
@@ -23,6 +23,18 @@ public class Wallet : MonoBehaviour
         {
             _currecncies.Add(currencyData);
         }
+    }
+
+    public void Add(Currency value)
+    {
+        var currency = _currecncies.Where(element => element.Title == value.Title).FirstOrDefault();
+
+        if(currency == null)
+        {
+            return;
+        }
+
+        currency.Increase(new CurrencyData(value.Title, value.GetCount()));
     }
 
     public IEnumerable<CurrencyData> GetCurrecncies() => _currecncies;
@@ -50,7 +62,7 @@ public class Wallet : MonoBehaviour
     public void Buy(ItemShopView item)
     {
         Pay(item.Price);
-        Unlock(item.Detail);
+        item.Detail.Unlock();
 
         GameStorage.Save(new PlayerData(GetComponent<Player>()), GameStorage.PlayerData);
     }
@@ -64,10 +76,5 @@ public class Wallet : MonoBehaviour
 
             OnValueChanged?.Invoke(myCurrency);
         }
-    }
-
-    private void Unlock(Detail detail)
-    {
-        detail.Buy();   
     }
 }

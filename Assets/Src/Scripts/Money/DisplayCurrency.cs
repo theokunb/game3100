@@ -4,9 +4,9 @@ using UnityEngine;
 public class DisplayCurrency : MonoBehaviour
 {
     [SerializeField] private TMP_Text _text;
-    [SerializeField] private string _title;
+    [SerializeField] private CurrencyType _currencyType;
 
-    public string Title => _title;
+    public string Title => Currency.GetTitle(_currencyType);
 
     public void Render(CurrencyData currencyData)
     {

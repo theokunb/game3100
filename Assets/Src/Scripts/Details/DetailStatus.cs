@@ -8,7 +8,7 @@ public class DetailStatus : MonoBehaviour
     public bool IsAvailable => _isAvailable;
     public bool CanBuyInShop => _inShop;
 
-    public void Buy()
+    public void Unlock()
     {
         _isAvailable = true;
     }

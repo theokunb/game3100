@@ -14,6 +14,17 @@ public class CurrencyData
 
     public void Decrease(CurrencyData currency)
     {
-        Count -= currency.Count;
+        if(Title == currency.Title)
+        {
+            Count -= currency.Count;
+        }
+    }
+
+    public void Increase(CurrencyData currency)
+    {
+        if (Title == currency.Title)
+        {
+            Count += currency.Count;
+        }
     }
 }

@@ -15,17 +15,9 @@ public class Player : Character
         GameStorage.Save(new PlayerData(this), GameStorage.PlayerData);
     }
 
-    public void DropWeapon(Weapon weapon, bool isSpawnDrop)
+    public void DropWeapon(Weapon weapon)
     {
         Weapons.Remove(weapon);
-        
-        if(isSpawnDrop == false)
-        {
-            Destroy(weapon.gameObject);
-        }
-        else
-        {
-            Instantiate(weapon, transform.position, Quaternion.identity);
-        }
+        Destroy(weapon.gameObject);
     }
 }

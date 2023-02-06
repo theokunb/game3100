@@ -3,8 +3,11 @@ using UnityEngine.AI;
 
 public class LevelCreator : MonoBehaviour
 {
+    private const float FinishPosition = 0.85f;
+
     [SerializeField] private Terrain[] _terrains;
     [SerializeField] private GameObject _boundTemplate;
+    [SerializeField] private Finish _finishTemplate;
     [SerializeField] private float _boundWidth;
     [SerializeField] private float _boundHeight;
     [SerializeField] private NavMeshSurface _navMesh;
@@ -12,6 +15,8 @@ public class LevelCreator : MonoBehaviour
     private int _platformWidth;
     private int _platformLenght;
     private int _platformHeight;
+    
+    public Finish Finish { get; private set; }
 
     private void CreateGround()
     {
@@ -41,6 +46,12 @@ public class LevelCreator : MonoBehaviour
             new Vector3(_boundWidth, _boundHeight, _platformLenght));
     }
 
+    private void CreateFinish()
+    {
+        Finish = Instantiate(_finishTemplate);
+        Finish.transform.position = new Vector3(_platformWidth / 2, 0, _platformLenght * FinishPosition);
+    }
+
     private void SetUpBound(GameObject bound, Vector3 position, Vector3 scale)
     {
         bound.transform.position = position;
@@ -55,5 +66,6 @@ public class LevelCreator : MonoBehaviour
 
         CreateGround();
         CreateBounds();
+        CreateFinish();
     }
 }

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4717713153197654984}
   - component: {fileID: 411554625751500487}
   - component: {fileID: 1393021829}
+  - component: {fileID: 1393021825}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -131,6 +132,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.9, z: 1}
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!114 &1393021825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475672772661074121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13de1825cc1737c44b0712d255a33b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3475672773034750546
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +182,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3475672772661074127}
     m_Modifications:
+    - target: {fileID: 1151675314966464750, guid: 31ea92db355fd4343b50b1c53554b9cb, type: 3}
+      propertyPath: _color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151675314966464750, guid: 31ea92db355fd4343b50b1c53554b9cb, type: 3}
+      propertyPath: _color.b
+      value: 0.23594336
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151675314966464750, guid: 31ea92db355fd4343b50b1c53554b9cb, type: 3}
+      propertyPath: _color.g
+      value: 0.8773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151675314966464750, guid: 31ea92db355fd4343b50b1c53554b9cb, type: 3}
+      propertyPath: _color.r
+      value: 0.2027857
+      objectReference: {fileID: 0}
     - target: {fileID: 1151675314966464752, guid: 31ea92db355fd4343b50b1c53554b9cb, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
