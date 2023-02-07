@@ -9,6 +9,7 @@ public class FinishMenu : MonoBehaviour
 {
     [SerializeField] private MenuBackground _menuBackground;
     [SerializeField] private ItemView _itemViewTemplate;
+    [SerializeField] private DisplayCurrency _currencyTemplate;
     [SerializeField] private GameObject _itemsContainer;
     [SerializeField] private GameObject _currencyContainer;
     [SerializeField] private Game _game;
@@ -38,8 +39,8 @@ public class FinishMenu : MonoBehaviour
 
     public void SetRewards(Bag playerBag)
     {
-
-        DisplayItems(playerBag.PopDetails());
+        DisplayItems(playerBag.GetDetails());
+        DisplayCurrencies(playerBag.GetCurrencies());
     }
 
     private void DisplayItems(IEnumerable<DetailDropped> _items)
@@ -49,6 +50,12 @@ public class FinishMenu : MonoBehaviour
             var displayedItem = Instantiate(_itemViewTemplate, _itemsContainer.transform);
             displayedItem.Render(item.GetDetail());
         }
+    }
+
+    private void DisplayCurrencies(IEnumerable<DroppedCurrency> _currencies)
+    {
+        var levelReward = _game.CurrentLevel.Reward;
+        var droppedReward = _currencies.ToList();
     }
 
     private void OnHomeClicked()

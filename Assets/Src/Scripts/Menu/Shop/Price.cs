@@ -7,6 +7,12 @@ public class Price
     [SerializeField] private CurrencyType _currencyType;
     [SerializeField] private int _count;
 
+    public Price(CurrencyType currencyType, int count)
+    {
+        _currencyType = currencyType;
+        _count = count;
+    }
+
     public CurrencyType CurrencyType => _currencyType;
     public int Count => _count;
 }

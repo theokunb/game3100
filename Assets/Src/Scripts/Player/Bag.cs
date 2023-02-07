@@ -1,26 +1,42 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Player))]
 public class Bag : MonoBehaviour
 {
-    private Stack<DetailDropped> _detailsDropped;
+    private Queue<DetailDropped> _detailsDropped;
+    private Queue<DroppedCurrency> _currenciesDropped;
 
     private void Awake()
     {
-        _detailsDropped = new Stack<DetailDropped>();
+        _detailsDropped = new Queue<DetailDropped>();
+        _currenciesDropped = new Queue<DroppedCurrency>();
     }
 
     public void Put(DetailDropped detailDropped)
     {
-        _detailsDropped.Push(detailDropped);
+        _detailsDropped.Enqueue(detailDropped);
     }
 
-    public IEnumerable<DetailDropped> PopDetails()
+    public void Put(DroppedCurrency currencyDropped)
     {
-        while (_detailsDropped.TryPeek(out DetailDropped _))
+        _currenciesDropped.Enqueue(currencyDropped);
+    }
+
+    public IEnumerable<DetailDropped> GetDetails()
+    {
+        while (_detailsDropped.Count > 0)
         {
-            yield return _detailsDropped.Pop();
+            yield return _detailsDropped.Dequeue();
+        }
+    }
+
+    public IEnumerable<DroppedCurrency> GetCurrencies()
+    {
+        while (_currenciesDropped.Count > 0)
+        {
+            yield return _currenciesDropped.Dequeue();
         }
     }
 }

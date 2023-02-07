@@ -177,11 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43e6de3e976c6e4496f265e13e5b918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currency:
-  - {fileID: 11400000, guid: d02032d1ad5416c499bc99b361bfb521, type: 2}
-  - {fileID: 11400000, guid: c797c80f99bca064485508690e621e74, type: 2}
-  - {fileID: 11400000, guid: 3df1580de0bc8e841b053d755f1c7060, type: 2}
   _dropItems: {fileID: 11400000, guid: d849344793b796543a0a1897df590f90, type: 2}
+  _currencyPull: {fileID: 11400000, guid: dddf23d60ae644c4ab73bee66caf6d6d, type: 2}
 --- !u!1001 &5745020483231947457
 PrefabInstance:
   m_ObjectHideFlags: 0

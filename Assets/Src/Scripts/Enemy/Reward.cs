@@ -6,6 +6,7 @@ public class Reward : MonoBehaviour
     private const int CurrencyDropChance = 60;
 
     [SerializeField] private ItemsPull _dropItems;
+    [SerializeField] private CurrencyPull _currencyPull;
 
     public GameObject GetReward()
     {
@@ -21,9 +22,9 @@ public class Reward : MonoBehaviour
         {
             roll = Random.Range(0, AllProbability);
 
-            if(roll < CurrencyDropChance)
+            if(roll > CurrencyDropChance)
             {
-                return null;
+                return GetRandomCurrency();
             }
             else
             {
@@ -34,6 +35,18 @@ public class Reward : MonoBehaviour
 
     private GameObject GetRandomItem()
     {
-        return _dropItems.GetRandomDetail()?.gameObject;
+        return _dropItems?.GetRandomDetail()?.gameObject;
+    }
+
+    private GameObject GetRandomCurrency()
+    {
+        var createdCurrency = _currencyPull.GetRandomCurrency();
+
+        if(createdCurrency == null)
+        {
+            return null;
+        }
+
+        return Instantiate(createdCurrency).gameObject;
     }
 }
