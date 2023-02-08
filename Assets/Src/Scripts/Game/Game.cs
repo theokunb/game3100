@@ -56,7 +56,7 @@ public class Game : MonoBehaviour, ISceneLoadHandler<int>
         Bag playerBag = _player.GetComponent<Bag>();
         
         _menuBackground.gameObject.SetActive(true);
-        _menuBackground.OnepMenu(_finishMenu.gameObject);
+        _menuBackground.OnepMenu(_finishMenu.GetComponent<RectTransform>());
         _finishMenu.SetRewards(playerBag);
         Save();
     }
@@ -70,6 +70,6 @@ public class Game : MonoBehaviour, ISceneLoadHandler<int>
     private void OnPlayerDied()
     {
         _menuBackground.gameObject.SetActive(true);
-        _menuBackground.OnepMenu(_loseMenu.gameObject);
+        _menuBackground.OnepMenu(_loseMenu.GetComponent<RectTransform>());
     }
 }

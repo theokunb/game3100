@@ -1,43 +1,51 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class MenuBackground : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup _background;
+    [SerializeField] private float _fadeTime;
+    [SerializeField] private float _translationTime;
     [SerializeField] private Button _pauseButton;
-    [SerializeField] private GameObject[] _menus;
+    [SerializeField] private RectTransform[] _menus;
 
-    public void OnepMenu(GameObject menu)
+    private CanvasGroup _canvasGroup;
+
+    private void Awake()
+    {
+        _canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    public void OnepMenu(RectTransform menu)
     {
         DisableMenus(menu);
-        _background.alpha = 0;
-        _background.LeanAlpha(1, 0.5f);
-        _pauseButton.interactable = false;
+        _canvasGroup.alpha = 0;
+        _canvasGroup.DOFade(1, _fadeTime);
 
-        menu.transform.localPosition = new Vector2(0, -Screen.height);
-        menu.LeanMoveLocalY(0, 0.5f).setEaseOutExpo().setOnComplete(() =>
+        menu.localPosition = new Vector3(0,-Screen.height, 0);
+        menu.DOAnchorPosY(0, _translationTime).OnComplete(() =>
         {
-            Time.timeScale = 0;
+            Time.timeScale = 0f;
         });
     }
 
-    public void CloseMenu(GameObject menu)
+    public void CloseMenu(RectTransform menu)
     {
-        Time.timeScale = 1;
-        _pauseButton.interactable = true;
+        Time.timeScale = 1f;
+        _canvasGroup.DOFade(0, _fadeTime);
 
-        menu.LeanMoveLocalY(-Screen.height, 0.5f).setEaseInExpo().setOnComplete(() =>
+        menu.DOAnchorPosY(-Screen.height, _translationTime).OnComplete(() => 
         {
             EnableMenus();
-            gameObject.SetActive(false);
+            _canvasGroup.gameObject.SetActive(false);
         });
     }
 
-    private void DisableMenus(GameObject gameObject)
+    private void DisableMenus(RectTransform targetMenu)
     {
         foreach(var menu in _menus)
         {
-            if(menu.gameObject != gameObject)
+            if(menu != targetMenu)
             {
                 menu.gameObject.SetActive(false);
             }

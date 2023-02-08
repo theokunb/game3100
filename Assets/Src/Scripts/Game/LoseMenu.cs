@@ -23,13 +23,13 @@ public class LoseMenu : MonoBehaviour
 
     private void OnHomeClicked()
     {
-        _menuBackground.CloseMenu(gameObject);
+        _menuBackground.CloseMenu(GetComponent<RectTransform>());
         MenuScene.Load();
     }
 
     private void OnReplayClicked()
     {
-        _menuBackground.CloseMenu(gameObject);
+        _menuBackground.CloseMenu(GetComponent<RectTransform>());
         GameScene.Load(_game.CurrentLevel.Id);
     }
 }

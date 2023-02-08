@@ -1,30 +1,22 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public abstract class Bullet : MonoBehaviour
 {
     [SerializeField] private float _lifeTime;
 
-    private Character _owner;
-    private int _damage;
-    private float _speed;
-    private float _elapsedTime;
-
-    public void Initialize(Character owner, int damage, float speed)
-    {
-        _owner = owner;
-        _damage = damage;
-        _speed = speed;
-        transform.parent = null;
-    }
+    protected Character Owner { get; private set; }
+    protected int Damage { get; private set; }
+    protected float Speed { get; private set; }
+    protected float ElapsedTime { get; private set; }
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-        _elapsedTime += Time.deltaTime;
+        Fly();
+        ElapsedTime += Time.deltaTime;
 
-        if (_elapsedTime >= _lifeTime)
+        if (ElapsedTime >= _lifeTime)
         {
-            ResetBullet();
+            LifeTimeExpired();
         }
     }
 
@@ -32,20 +24,28 @@ public class Bullet : MonoBehaviour
     {
         if (other.TryGetComponent(out Character character))
         {
-            if (character.GetType() != _owner.GetType())
+            if (character.GetType() != Owner.GetType())
             {
-                var health = character.GetComponent<Health>();
-                health.TakeDamage(_damage);
-
-                character.SetWhoAttacked(_owner);
-                ResetBullet();
+                Hit(character);
             }
         }
     }
 
-    private void ResetBullet()
+    public void Initialize(Character owner, int damage, float speed)
     {
-        _elapsedTime = 0;
+        Owner = owner;
+        Damage = damage;
+        Speed = speed;
+        transform.parent = null;
+    }
+
+    protected void ResetBullet()
+    {
+        ElapsedTime = 0;
         gameObject.SetActive(false);
     }
+
+    protected abstract void Fly();
+    protected abstract void Hit(Character character);
+    protected abstract void LifeTimeExpired();
 }

@@ -5,18 +5,16 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(RectTransform))]
 public class FinishMenu : MonoBehaviour
 {
     [SerializeField] private MenuBackground _menuBackground;
-    [SerializeField] private ItemView _itemViewTemplate;
-    [SerializeField] private DisplayCurrency _currencyTemplate;
-    [SerializeField] private GameObject _itemsContainer;
-    [SerializeField] private GameObject _currencyContainer;
     [SerializeField] private Game _game;
     [SerializeField] private Button _homeButton;
     [SerializeField] private Button _replayButton;
     [SerializeField] private Button _nextButton;
 
+    private RectTransform _rectTransform;
 
     private void OnEnable()
     {
@@ -34,6 +32,7 @@ public class FinishMenu : MonoBehaviour
 
     private void Start()
     {
+        _rectTransform = GetComponent<RectTransform>();
         _nextButton.gameObject.SetActive(_game.HaveNextLevel());
     }
 
@@ -45,11 +44,7 @@ public class FinishMenu : MonoBehaviour
 
     private void DisplayItems(IEnumerable<DetailDropped> _items)
     {
-        foreach(var item in _items)
-        {
-            var displayedItem = Instantiate(_itemViewTemplate, _itemsContainer.transform);
-            displayedItem.Render(item.GetDetail());
-        }
+
     }
 
     private void DisplayCurrencies(IEnumerable<DroppedCurrency> _currencies)
@@ -60,19 +55,19 @@ public class FinishMenu : MonoBehaviour
 
     private void OnHomeClicked()
     {
-        _menuBackground.CloseMenu(gameObject);
+        _menuBackground.CloseMenu(_rectTransform);
         MenuScene.Load();
     }
 
     private void OnReplayClicked()
     {
-        _menuBackground.CloseMenu(gameObject);
+        _menuBackground.CloseMenu(_rectTransform);
         GameScene.Load(_game.CurrentLevel.Id);
     }
 
     private void OnNextClicked()
     {
-        _menuBackground.CloseMenu(gameObject);
+        _menuBackground.CloseMenu(_rectTransform);
         GameScene.Load(_game.CurrentLevel.Id + 1);
     }
 }

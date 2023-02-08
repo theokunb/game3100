@@ -5,38 +5,26 @@ using UnityEngine;
 [RequireComponent(typeof(Player))]
 public class Bag : MonoBehaviour
 {
-    private Queue<DetailDropped> _detailsDropped;
-    private Queue<DroppedCurrency> _currenciesDropped;
+    private List<DetailDropped> _detailsDropped;
+    private List<DroppedCurrency> _currenciesDropped;
 
     private void Awake()
     {
-        _detailsDropped = new Queue<DetailDropped>();
-        _currenciesDropped = new Queue<DroppedCurrency>();
+        _detailsDropped = new List<DetailDropped>();
+        _currenciesDropped = new List<DroppedCurrency>();
     }
 
     public void Put(DetailDropped detailDropped)
     {
-        _detailsDropped.Enqueue(detailDropped);
+        _detailsDropped.Add(detailDropped);
     }
 
     public void Put(DroppedCurrency currencyDropped)
     {
-        _currenciesDropped.Enqueue(currencyDropped);
+        _currenciesDropped.Add(currencyDropped);
     }
 
-    public IEnumerable<DetailDropped> GetDetails()
-    {
-        while (_detailsDropped.Count > 0)
-        {
-            yield return _detailsDropped.Dequeue();
-        }
-    }
+    public IEnumerable<DetailDropped> GetDetails() => _detailsDropped;
 
-    public IEnumerable<DroppedCurrency> GetCurrencies()
-    {
-        while (_currenciesDropped.Count > 0)
-        {
-            yield return _currenciesDropped.Dequeue();
-        }
-    }
+    public IEnumerable<DroppedCurrency> GetCurrencies() => _currenciesDropped;
 }

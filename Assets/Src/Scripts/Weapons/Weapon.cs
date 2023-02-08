@@ -10,7 +10,8 @@ public class Weapon : Detail
     private const string SpeedLabel = "скорость:";
 
     [SerializeField] private int _damage;
-    [SerializeField] private float _delayBetweenShoot;
+    [SerializeField] private float _maxDelayBetweenShoot;
+    [SerializeField] private float _minDelayBetweenShoot;
     [SerializeField] private Transform _shootPlace;
     [SerializeField] private Bullet _template;
     [SerializeField] private float _bulletSpeed;
@@ -18,6 +19,7 @@ public class Weapon : Detail
     private Character _owner;
     private float _elapsedTime;
     private List<Bullet> _bullets;
+    private float _delayBetweenShoot;
 
     public int Damage => _damage;
 
@@ -25,6 +27,7 @@ public class Weapon : Detail
     {
         _owner = GetComponentInParent<Character>();
         _bullets = new List<Bullet>();
+        _delayBetweenShoot = Random.Range(_minDelayBetweenShoot, _maxDelayBetweenShoot);
 
         for (int i = 0; i < BulletsCount; i++)
         {

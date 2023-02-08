@@ -166,8 +166,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: "\u043C\u0438\u043D\u0438\u0433\u0430\u043D"
   _description: "\u0445\u043E\u0440\u043E\u0448\u0435\u0435 \u043E\u0440\u0443\u0436\u0438\u0435"
-  _damage: 8
-  _delayBetweenShoot: 0.1
+  _damage: 10
+  _maxDelayBetweenShoot: 0.3
+  _minDelayBetweenShoot: 0.2
   _shootPlace: {fileID: 7008777911112941734}
   _template: {fileID: 1090492303719371573, guid: 6dd69cfe8005d4c4a911d65a76ca5cc4, type: 3}
   _bulletSpeed: 15

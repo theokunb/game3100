@@ -1,23 +1,32 @@
+using IJunior.TypedScenes;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameMenu : MonoBehaviour
 {
     [SerializeField] private MenuBackground _menuBackground;
-    [SerializeField] private Button _closeButton;
+    [SerializeField] private Button _resumeButton;
+    [SerializeField] private Button _exitButton;
 
     private void OnEnable()
     {
-        _closeButton.onClick.AddListener(OnCloseClicked);
+        _resumeButton.onClick.AddListener(OnResumeClicked);
+        _exitButton.onClick.AddListener(OnExitClicked);
     }
 
     private void OnDisable()
     {
-        _closeButton.onClick.RemoveListener(OnCloseClicked);
+        _resumeButton.onClick.RemoveListener(OnResumeClicked);
+        _exitButton.onClick.RemoveListener(OnExitClicked);
     }
 
-    private void OnCloseClicked()
+    private void OnResumeClicked()
     {
-        _menuBackground.CloseMenu(gameObject);
+        _menuBackground.CloseMenu(GetComponent<RectTransform>());
+    }
+
+    private void OnExitClicked()
+    {
+        MenuScene.Load();
     }
 }

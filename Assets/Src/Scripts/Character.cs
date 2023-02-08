@@ -73,7 +73,7 @@ public class Character : MonoBehaviour
 
     public void SetDetail(Weapon weapon)
     {
-        Weapons.Add(weapon);
+        Weapons.Insert(0, weapon);
     }
 
     public virtual int CalculateHealth()
