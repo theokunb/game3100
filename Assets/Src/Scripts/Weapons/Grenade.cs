@@ -1,13 +1,26 @@
 using System.Linq;
 using UnityEngine;
 
-public class Missile : Bullet
+[RequireComponent(typeof(Rigidbody))]
+public class Grenade : Bullet
 {
     [SerializeField] private float _radius;
 
+    private Rigidbody _rigidbody;
+
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void OnEnable()
+    {
+        _rigidbody.velocity = transform.forward * Speed * Time.deltaTime;
+    }
+
     protected override void Fly()
     {
-        transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+        
     }
 
     protected override void Hit(Character character)
@@ -28,7 +41,7 @@ public class Missile : Bullet
             .Where(character => character.GetType() != Owner.GetType())
             .ToArray();
 
-        foreach(var enemy in enemies)
+        foreach (var enemy in enemies)
         {
             var health = enemy.GetComponent<Health>();
             enemy.SetWhoAttacked(Owner);
