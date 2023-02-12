@@ -65,14 +65,14 @@ public class Shop : MonoBehaviour
         }
     }
 
-    private void OnItemSelected(ItemShopView itemShopView)
+    private void OnItemSelected(DetailView itemShopView)
     {
         _buyWindow.gameObject.SetActive(true);
         _buyWindow.Render(itemShopView);
         _buyWindow.DialogResult += OnDialogResult;
     }
 
-    private void OnDialogResult(ItemShopView item,bool result)
+    private void OnDialogResult(DetailView item,bool result)
     {
         _buyWindow.DialogResult -= OnDialogResult;
 

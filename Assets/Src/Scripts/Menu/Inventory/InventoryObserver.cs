@@ -21,7 +21,7 @@ public class InventoryObserver : MonoBehaviour
         {
             var detailView = Instantiate(_template, _itemsContainer.transform);
             detailView.Render(detailShop);
-            detailView.OnEquipButtonClicked += OnItemClicked;
+            detailView.ButtonClicked += OnItemClicked;
         }
     }
 

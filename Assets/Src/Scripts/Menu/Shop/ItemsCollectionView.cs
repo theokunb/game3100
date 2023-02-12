@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class ItemsCollectionView : MonoBehaviour
 {
-    [SerializeField] private ItemShopView _template;
+    [SerializeField] private DetailView _template;
     [SerializeField] private GameObject _container;
     [SerializeField] private TMP_Text _label;
 
-    private List<ItemShopView> _items;
+    private List<DetailView> _items;
 
-    public event Action<ItemShopView> ItemSelected;
+    public event Action<DetailView> ItemSelected;
 
     private void OnEnable()
     {
@@ -23,13 +23,13 @@ public class ItemsCollectionView : MonoBehaviour
     {
         foreach(var item in _items)
         {
-            item.BuyButtonClicked -= DetailBuyButtonClicked;
+            item.ButtonClicked -= DetailBuyButtonClicked;
         }
     }
 
     private void Awake()
     {
-        _items= new List<ItemShopView>();
+        _items= new List<DetailView>();
     }
 
     public void Render(IEnumerable<DetailShop> details)
@@ -51,7 +51,7 @@ public class ItemsCollectionView : MonoBehaviour
         Subscribe();
     }
 
-    private void DetailBuyButtonClicked(ItemShopView obj)
+    private void DetailBuyButtonClicked(DetailView obj)
     {
         ItemSelected?.Invoke(obj);
     }
@@ -60,7 +60,7 @@ public class ItemsCollectionView : MonoBehaviour
     {
         foreach(var item in _items)
         {
-            item.BuyButtonClicked += DetailBuyButtonClicked;
+            item.ButtonClicked += DetailBuyButtonClicked;
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class BuyWindow : MonoBehaviour
 {
@@ -11,13 +12,14 @@ public class BuyWindow : MonoBehaviour
     [SerializeField] private TMP_Text _title;
     [SerializeField] private TMP_Text _stats;
     [SerializeField] private TMP_Text _description;
+    [SerializeField] private PriceView _priceView;
     [SerializeField] private Button _buyButton;
     [SerializeField] private Button _closeButton;
     [SerializeField] private PlayerWallet _playerWallet;
 
-    private ItemShopView _item;
+    private DetailView _item;
 
-    public event Action<ItemShopView, bool> DialogResult;
+    public event Action<DetailView, bool> DialogResult;
 
     private void OnEnable()
     {
@@ -31,13 +33,14 @@ public class BuyWindow : MonoBehaviour
         _buyButton.onClick.RemoveListener(OnBuyClicked);
     }
 
-    public void Render(ItemShopView item)
+    public void Render(DetailView item)
     {
         _item = item;
         _image.sprite = item.Image.sprite;
         _title.text = item.Detail.Title;
         _stats.text = item.Detail.GetStats();
-        _description.text = $"{item.Detail.Description}\n{GetPriceDescription(item.FullPrice)}";
+        _description.text = $"{item.Detail.Description}";
+        _priceView.Display(item.FullPrice);
         _buyButton.interactable = _playerWallet.CanBuy(item.FullPrice);
     }
 

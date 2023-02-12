@@ -21,7 +21,7 @@ public class PlayerWallet : MonoBehaviour
         _wallet = wallet;
     }
 
-    public void Buy(ItemShopView item)
+    public void Buy(DetailView item)
     {
         Pay(item.FullPrice);
         item.Detail.Unlock();

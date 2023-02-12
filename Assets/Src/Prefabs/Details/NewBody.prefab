@@ -89,10 +89,17 @@ MonoBehaviour:
   - _currencyType: 1
     _count: 100
   - _currencyType: 0
+<<<<<<< HEAD:Assets/Src/Prefabs/Details/EliteBody.prefab
+    _count: 8
+  - _currencyType: 2
+    _count: 25
+--- !u!114 &8420119580156701399
+=======
     _count: 200
   - _currencyType: 2
     _count: 50
 --- !u!114 &6158483194370148998
+>>>>>>> parent of 87b8c93 (добавил моделей и Ui):Assets/Src/Prefabs/Details/NewBody.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
